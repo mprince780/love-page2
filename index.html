@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff4d88">
+
+<!-- WhatsApp Preview -->
+<meta property="og:title" content="For My Love ❤️">
+<meta property="og:description" content="I made something special for you 💖">
+<meta property="og:image" content="https://raw.githubusercontent.com/mprince780/love-page/main/16-43-26-218_512.webp">
+<meta property="og:url" content="https://mprince780.github.io/love-page/">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For My Love ❤️</title>
+
+<style>
+
+/* Background */
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+}
+
+/* Card */
+
+.card {
+  width: 90%;
+  max-width: 380px;
+  background: rgba(255,255,255,0.18);
+  padding: 30px 20px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  backdrop-filter: blur(6px);
+}
+
+/* Profile Image */
+
+.profile-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid white;
+  margin-bottom: 15px;
+}
+
+/* Glowing Name */
+
+.glow {
+  font-size: 32px;
+  color: #b30059;
+  margin: 10px 0;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #ff4d88; }
+  to   { text-shadow: 0 0 20px #ff0055; }
+}
+
+/* Text */
+
+.section-text {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+/* Typing */
+
+#typing {
+  font-size: 20px;
+  font-weight: bold;
+  color: #b30059;
+  min-height: 28px;
+  margin: 8px 0;
+}
+
+/* Music Button */
+
+.music-btn {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 25px;
+  background: #ff4d88;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+/* Yes / No */
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+#yes, #no {
+  padding: 12px 28px;
+  font-size: 17px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+#yes {
+  background: #28a745;
+  color: white;
+}
+
+#no {
+  background: #dc3545;
+  color: white;
+  position: relative;
+}
+
+/* Hearts + Confetti */
+
+.heart, .confetti {
+  position: fixed;
+  top: -10px;
+  font-size: 24px;
+  animation: fall linear infinite;
+  z-index: 9999;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- Music -->
+
+<audio id="bgMusic" loop>
+  <source src="https://raw.githubusercontent.com/mprince780/love-page/main/Tera%20Mera%20Hai%20Pyar%20Amar.mp3" type="audio/mpeg">
+</audio>
+
+
+<div class="card" id="content">
+
+  <!-- Image -->
+
+  <img class="profile-img"
+  src="https://raw.githubusercontent.com/mprince780/love-page/main/super-cute-teddy-bears-couple-in-love-happy-valentine-s-day-concept-background-ai-generated-image-photo.jpg">
+
+  <!-- Name -->
+
+  <h1 class="glow">Hey ❤️ Seema</h1>
+
+  <!-- Text -->
+
+  <div class="section-text">
+    You make my life beautiful 💖<br>
+    Will you be my Valentine forever? 😘
+  </div>
+
+  <!-- Typing -->
+
+  <div id="typing"></div>
+
+  <!-- Music -->
+
+  <button id="playBtn" class="music-btn" onclick="playMusic()">
+    🎵 Play Our Song
+  </button>
+
+  <!-- Buttons -->
+
+  <div class="btn-group">
+    <button id="yes" onclick="yesClick()">Yes 😍</button>
+    <button id="no" ontouchstart="moveNo()" onmouseover="moveNo()">No 🙈</button>
+  </div>
+
+</div>
+
+
+<script>
+
+/* Music */
+
+function playMusic() {
+  const music = document.getElementById("bgMusic");
+  const btn = document.getElementById("playBtn");
+
+  music.play();
+  btn.style.display = "none";
+}
+
+
+/* No Button */
+
+function moveNo() {
+
+  const noBtn = document.getElementById("no");
+
+  let x = Math.random() * 200 - 100;
+  let y = Math.random() * 200 - 100;
+
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+
+/* Typing Effect */
+
+const text = "I Love You So Much ❤️";
+let index = 0;
+
+function typeText() {
+
+  if (index < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(index);
+    index++;
+    setTimeout(typeText, 120);
+  }
+}
+
+typeText();
+
+
+/* Celebration */
+
+function startCelebration() {
+
+  const heartInterval = setInterval(() => {
+
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+
+  }, 300);
+
+
+  const confettiInterval = setInterval(() => {
+
+    const conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.innerHTML = "🎊";
+
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+    document.body.appendChild(conf);
+
+    setTimeout(() => conf.remove(), 5000);
+
+  }, 400);
+
+
+  setTimeout(() => {
+
+    clearInterval(heartInterval);
+    clearInterval(confettiInterval);
+
+  }, 15000);
+}
+
+
+/* Yes Click */
+
+function yesClick() {
+
+  document.getElementById("content").innerHTML = `
+
+    <h1 class="glow">Yayyy 🎉❤️</h1>
+
+    <h2>I Love You 😘</h2>
+
+    <p>You are my forever 💍</p>
+
+    <img class="profile-img"
+    src="https://raw.githubusercontent.com/mprince780/love-page/main/16-43-26-218_512.webp"><br>
+
+    <img class="profile-img"
+    src="https://raw.githubusercontent.com/mprince780/love-page/main/12400105_7286e.gif"
+    width="220">
+  `;
+
+  startCelebration();
+}
+
+
+/* PWA */
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+
+</script>
+
+</body>
+</html>
